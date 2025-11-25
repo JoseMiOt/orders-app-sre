@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-alert-rules
+  namespace: monitoring
+data:
+  alert-rules.yml: |
+    groups:
+      - name: orders-app-alerts
+        rules:
+          - alert: OrdersAppDown
+            expr: up{job="orders-app"} == 0
+            for: 10s
+            labels:
+              severity: critical
+            annotations:
+              summary: "Orders App está caído"
+              description: "El servicio orders-app no responde"
+
+          - alert: HighRequestLatency
+            expr: http_server_requests_seconds_max{application="orders-app"} > 1
+            for: 30s
+            labels:
+              severity: warning
+            annotations:
+              summary: "Latencia alta en orders-app"
+              description: "Los requests están tardando más de 1s"
+

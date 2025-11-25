@@ -1,0 +1,25 @@
+### Obtener lista de productos
+GET http://localhost:8081/products
+
+
+### Crear nueva orden
+POST http://localhost:8081/orders
+Content-Type: application/json
+
+[1,2]
+
+
+### Ver todas las órdenes creadas
+GET http://localhost:8081/orders
+
+
+### Obtener una orden por ID
+GET http://localhost:8081/orders/2
+
+
+### Eliminar una orden por ID
+DELETE http://localhost:8081/orders/12
+
+
+### Eliminar TODAS las órdenes
+DELETE http://localhost:8081/orders

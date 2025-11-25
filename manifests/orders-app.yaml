@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orders-app
+  namespace: orders-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: orders-app
+  template:
+    metadata:
+      labels:
+        app: orders-app
+    spec:
+      containers:
+        - name: orders-app
+          image: orders-app:latest   # IMAGEN LOCAL DE MINIKUBE
+          imagePullPolicy: Never     # IMPORTANTE: usar la imagen cargada
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 20
+            periodSeconds: 15
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orders-app
+  namespace: orders-system
+spec:
+  selector:
+    app: orders-app
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+  type: ClusterIP
