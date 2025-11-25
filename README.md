@@ -14,7 +14,7 @@
 
 Aplicación de ejemplo para gestionar órdenes y productos, desarrollada en **Spring Boot**, desplegada en **Kubernetes**, monitoreada con **Prometheus**, visualizada mediante **Grafana** y con alertas enviadas a **Slack** utilizando **Alertmanager**.
 
-Este proyecto forma parte de mi proyecto final de la Academia SRE/Observabilidad.
+Este proyecto forma parte de mi proyecto final de la Academia SRE.
 
 ---
 
