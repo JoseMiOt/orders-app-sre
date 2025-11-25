@@ -83,33 +83,7 @@ Prometheus las lee, Grafana las visualiza y Alertmanager envía alertas a Slack.
 - 📈 **Grafana**
 - 🚨 **Alertmanager**
 - 🔗 **Slack Webhooks**
-
----
-
-# 📁 Estructura del Proyecto
-
-orders-app/
-│── manifests/
-│ ├── prometheus-configmap.yaml
-│ ├── prometheus-deployment.yaml
-│ ├── grafana-deployment.yaml
-│ ├── alertmanager-configmap.yaml
-│ ├── alertmanager-deployment.yaml
-│ └── alert-rules.yaml
-│
-├── src/main/java/com/ordersystem/ordersapp/
-│ ├── controller/
-│ ├── model/
-│ └── service/
-│
-├── docs/screenshots/
-│── README.md
-│── CONTRIBUTING.md
-│── LICENSE
-├── Dockerfile
-├── pom.xml
-
-
+  
 ---
 
 # 🚀 Ejecución Local
