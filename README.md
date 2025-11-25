@@ -62,34 +62,13 @@ Prometheus las lee, Grafana las visualiza y Alertmanager envía alertas a Slack.
 
 ## 🏗️ Arquitectura
 
-                         +--------------------------------------+
-                         |           Orders App (Java)           |
-                         |     Spring Boot + Actuator            |
-                         |       /actuator/prometheus            |
-                         +------------------+---------------------+
-                                            |
-                                            | Metrics scraped by Prometheus
-                                            v
-+-----------------------------------------------------------------------------------------+
-|                                      Prometheus                                          |
-|   - Scraping a /actuator/prometheus                                                      |
-|   - alert-rules.yml                                                                      |
-|   - Envío de alertas a Alertmanager                                                      |
-+-------------------------------+-----------------------------+-----------------------------+
-                                |                             |
-                                |   HTTP /api/v2/alerts       |
-                                v                             v
-+------------------------------------+       +------------------------------------------------+
-|            Alertmanager            |       |                    Grafana                     |
-|   - Routing de alertas → Slack     |       |   - Data source: Prometheus                    |
-|   - Gestión de grupos de alertas   |       |   - Dashboards con métricas                    |
-+-------------------+----------------+       +------------------------+-----------------------+
-                    |                                            	
-                    v                                            	
-+------------------------------------+                            	
-|               Slack                |                            	
-|         Canal #alerts              |                            	
-+------------------------------------+
+| Componente      | Función |
+|-----------------|---------|
+| **Orders App**  | Expone métricas en `/actuator/prometheus` vía Spring Boot + Actuator |
+| **Prometheus**  | Scrapea métricas, aplica `alert-rules.yml` y envía alertas a Alertmanager |
+| **Alertmanager**| Procesa reglas, agrupa alertas y las envía a un Webhook de Slack |
+| **Slack**       | Recibe alertas en el canal `#alerts` |
+| **Grafana**     | Consume Prometheus como Data Source y muestra dashboards personalizados |
 
 ---
 
